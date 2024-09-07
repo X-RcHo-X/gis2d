@@ -1,3 +1,5 @@
 # Игнорировать все файлы в каталогах
 build/
 EmptyMapStub/
+
+CMakeLists.txt.user
