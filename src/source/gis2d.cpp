@@ -75,11 +75,11 @@ void CGis2D::wheelEvent(QWheelEvent* event)
 {
     bool isPositive = event->angleDelta().y() > 0;
 
-    //ѕолучение пиксельной координаты левой верхней точки начала видимой карты
+    //получение пиксельной координаты левой верхней точки начала видимой карты
     QPoint curZoomPixelPoint = earth::getStartPointRelativeCenter(m_screenMiddle, m_scroll, m_zoom);
-    //ѕолучение текущих курсорных координат
+    //получение текущих курсорных координат
     QPoint curMousePos = mapFromGlobal(QCursor::pos());
-    //—читаем пиксели курсорных координат отностильно стартовой точки
+    //читаем пиксели курсорных координат отностильно стартовой точки
     int curPixelX = curMousePos.x() - curZoomPixelPoint.x();
     int curPixelY = curMousePos.y() - curZoomPixelPoint.y();
 
@@ -91,17 +91,17 @@ void CGis2D::wheelEvent(QWheelEvent* event)
     else if (m_zoom >= 1)
         m_zoom -= 1;
 
-    //ѕолучение пиксельной координаты левой верхней точки начала видимой карты после скрола
+    //получение пиксельной координаты левой верхней точки начала видимой карты после скрола
     QPoint newZoomPixelPoint = earth::getStartPointRelativeCenter(m_screenMiddle, m_scroll, m_zoom);
-    //ѕересчитываем пиксели курсорных координат отностильно новой стартовой точки
+    //пересчитываем пиксели курсорных координат отностильно новой стартовой точки
     int newPixelX = curMousePos.x() - newZoomPixelPoint.x();
     int newPixelY = curMousePos.y() - newZoomPixelPoint.y();
 
-    //ѕеревеод текущих географических координат в пиксели на новом зуме
+    //перевеод текущих географических координат в пиксели на новом зуме
     System::coordTuple newPixel;
     newPixel = earth::getPixelsFromLatLon(*std::get<0>(curCoords), *std::get<1>(curCoords), m_zoom);
 
-    //—двигаем географические пиксели под курсор
+    //двигаем географические пиксели под курсор
     m_scroll += QPoint(newPixelX - *std::get<0>(newPixel), newPixelY - *std::get<1>(newPixel));
     m_layerManager->setOfset(m_scroll);
 
