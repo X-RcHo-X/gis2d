@@ -13,24 +13,24 @@ class CBaseLayer
 public:
     virtual ~CBaseLayer() {}
 
-    virtual void repaint(QPainter& painter)                    = 0;   //Перерисовка всего на слое
-    virtual void resize(const QSize& size)                     = 0;   //Изменение размера окна
-    virtual void setOfset(const QPoint& point)                 = 0;   //Установка сдвига карты после MouseMoveEvent
-    virtual void setZoom(const int& zoom)                      = 0;   //Установка уровня детализации карты
-    virtual void setLayerName(const QString& layerName)        = 0;   //Установка имени слоя
-    virtual void setLayerVisible(bool visibility)              = 0;   //Установка видимости слоя
+    virtual void repaint(QPainter& painter)                    = 0;   //РџРµСЂРµСЂРёСЃРѕРІРєР° РІСЃРµРіРѕ РЅР° СЃР»РѕРµ
+    virtual void resize(const QSize& size)                     = 0;   //РР·РјРµРЅРµРЅРёРµ СЂР°Р·РјРµСЂР° РѕРєРЅР°
+    virtual void setOfset(const QPoint& point)                 = 0;   //РЈСЃС‚Р°РЅРѕРІРєР° СЃРґРІРёРіР° РєР°СЂС‚С‹ РїРѕСЃР»Рµ MouseMoveEvent
+    virtual void setZoom(const int& zoom)                      = 0;   //РЈСЃС‚Р°РЅРѕРІРєР° СѓСЂРѕРІРЅСЏ РґРµС‚Р°Р»РёР·Р°С†РёРё РєР°СЂС‚С‹
+    virtual void setLayerName(const QString& layerName)        = 0;   //РЈСЃС‚Р°РЅРѕРІРєР° РёРјРµРЅРё СЃР»РѕСЏ
+    virtual void setLayerVisible(bool visibility)              = 0;   //РЈСЃС‚Р°РЅРѕРІРєР° РІРёРґРёРјРѕСЃС‚Рё СЃР»РѕСЏ
 
-    virtual void clicked(const System::coordTuple& coords) {}   //Нажатие мышкой на карте
+    virtual void clicked(const System::coordTuple& coords) {}   //РќР°Р¶Р°С‚РёРµ РјС‹С€РєРѕР№ РЅР° РєР°СЂС‚Рµ
 
-    //Общая информация о создаваемом слое
+    //РћР±С‰Р°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ СЃРѕР·РґР°РІР°РµРјРѕРј СЃР»РѕРµ
     struct SLayerInfo
     {
-        QPoint currentPosition;     //Текущее нажатие мыши
-        QPoint screenMiddle;        //Центр экрана относительно которого производятся расчёты
-        QPoint scroll;              //Точка для отслеживания MouseMoveEvent
-        QString layerName;          //Имя слоя
-        int zoom = 1;               //Уровень детализации карты
-        bool layerVisible = true;   //Видимость уровня
+        QPoint currentPosition;     //РўРµРєСѓС‰РµРµ РЅР°Р¶Р°С‚РёРµ РјС‹С€Рё
+        QPoint screenMiddle;        //Р¦РµРЅС‚СЂ СЌРєСЂР°РЅР° РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РєРѕС‚РѕСЂРѕРіРѕ РїСЂРѕРёР·РІРѕРґСЏС‚СЃСЏ СЂР°СЃС‡С‘С‚С‹
+        QPoint scroll;              //РўРѕС‡РєР° РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ MouseMoveEvent
+        QString layerName;          //РРјСЏ СЃР»РѕСЏ
+        int zoom = 1;               //РЈСЂРѕРІРµРЅСЊ РґРµС‚Р°Р»РёР·Р°С†РёРё РєР°СЂС‚С‹
+        bool layerVisible = true;   //Р’РёРґРёРјРѕСЃС‚СЊ СѓСЂРѕРІРЅСЏ
     };
     SLayerInfo m_layerInfo;
 };

@@ -75,11 +75,11 @@ void CGis2D::wheelEvent(QWheelEvent* event)
 {
     bool isPositive = event->angleDelta().y() > 0;
 
-    //Получение пиксельной координаты левой верхней точки начала видимой карты
+    //С•РѕР»СѓС‡РµРЅРёРµ РїРёРєСЃРµР»СЊРЅРѕР№ РєРѕРѕСЂРґРёРЅР°С‚С‹ Р»РµРІРѕР№ РІРµСЂС…РЅРµР№ С‚РѕС‡РєРё РЅР°С‡Р°Р»Р° РІРёРґРёРјРѕР№ РєР°СЂС‚С‹
     QPoint curZoomPixelPoint = earth::getStartPointRelativeCenter(m_screenMiddle, m_scroll, m_zoom);
-    //Получение текущих курсорных координат
+    //С•РѕР»СѓС‡РµРЅРёРµ С‚РµРєСѓС‰РёС… РєСѓСЂСЃРѕСЂРЅС‹С… РєРѕРѕСЂРґРёРЅР°С‚
     QPoint curMousePos = mapFromGlobal(QCursor::pos());
-    //Считаем пиксели курсорных координат отностильно стартовой точки
+    //вЂ”С‡РёС‚Р°РµРј РїРёРєСЃРµР»Рё РєСѓСЂСЃРѕСЂРЅС‹С… РєРѕРѕСЂРґРёРЅР°С‚ РѕС‚РЅРѕСЃС‚РёР»СЊРЅРѕ СЃС‚Р°СЂС‚РѕРІРѕР№ С‚РѕС‡РєРё
     int curPixelX = curMousePos.x() - curZoomPixelPoint.x();
     int curPixelY = curMousePos.y() - curZoomPixelPoint.y();
 
@@ -91,17 +91,17 @@ void CGis2D::wheelEvent(QWheelEvent* event)
     else if (m_zoom >= 1)
         m_zoom -= 1;
 
-    //Получение пиксельной координаты левой верхней точки начала видимой карты после скрола
+    //С•РѕР»СѓС‡РµРЅРёРµ РїРёРєСЃРµР»СЊРЅРѕР№ РєРѕРѕСЂРґРёРЅР°С‚С‹ Р»РµРІРѕР№ РІРµСЂС…РЅРµР№ С‚РѕС‡РєРё РЅР°С‡Р°Р»Р° РІРёРґРёРјРѕР№ РєР°СЂС‚С‹ РїРѕСЃР»Рµ СЃРєСЂРѕР»Р°
     QPoint newZoomPixelPoint = earth::getStartPointRelativeCenter(m_screenMiddle, m_scroll, m_zoom);
-    //Пересчитываем пиксели курсорных координат отностильно новой стартовой точки
+    //С•РµСЂРµСЃС‡РёС‚С‹РІР°РµРј РїРёРєСЃРµР»Рё РєСѓСЂСЃРѕСЂРЅС‹С… РєРѕРѕСЂРґРёРЅР°С‚ РѕС‚РЅРѕСЃС‚РёР»СЊРЅРѕ РЅРѕРІРѕР№ СЃС‚Р°СЂС‚РѕРІРѕР№ С‚РѕС‡РєРё
     int newPixelX = curMousePos.x() - newZoomPixelPoint.x();
     int newPixelY = curMousePos.y() - newZoomPixelPoint.y();
 
-    //Перевеод текущих географических координат в пиксели на новом зуме
+    //С•РµСЂРµРІРµРѕРґ С‚РµРєСѓС‰РёС… РіРµРѕРіСЂР°С„РёС‡РµСЃРєРёС… РєРѕРѕСЂРґРёРЅР°С‚ РІ РїРёРєСЃРµР»Рё РЅР° РЅРѕРІРѕРј Р·СѓРјРµ
     System::coordTuple newPixel;
     newPixel = earth::getPixelsFromLatLon(*std::get<0>(curCoords), *std::get<1>(curCoords), m_zoom);
 
-    //Сдвигаем географические пиксели под курсор
+    //вЂ”РґРІРёРіР°РµРј РіРµРѕРіСЂР°С„РёС‡РµСЃРєРёРµ РїРёРєСЃРµР»Рё РїРѕРґ РєСѓСЂСЃРѕСЂ
     m_scroll += QPoint(newPixelX - *std::get<0>(newPixel), newPixelY - *std::get<1>(newPixel));
     m_layerManager->setOfset(m_scroll);
 
